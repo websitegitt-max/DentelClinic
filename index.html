@@ -46,7 +46,7 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useMemo } = React;
+    const { useState } = React;
 
     const CLINIC_CONFIG = {
       clinicName: "Dentel clinic",
@@ -66,49 +66,57 @@
       { days: "Sunday", hours: "9:00 AM – 9:00 PM", status: "Consultations & Urgent Dental Care" }
     ];
 
-    // 6 Distinct Teeth & Dental Treatment Photos
-    const TREATMENT_GALLERY = [
+    // 10 Distinct High-Definition Dental & Teeth Treatment Photos (No text overlay)
+    const GALLERY_IMAGES = [
       {
         id: 1,
-        title: "Ultrasonic Scaling & Deep Stain Removal",
-        category: "Cleaning & Hygiene",
-        img: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
-        desc: "Gentle ultrasonic piezo scaling removing deep tartar and plaque while safeguarding natural tooth enamel."
+        title: "Microscopic Ultrasonic Scaling",
+        img: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80"
       },
       {
         id: 2,
-        title: "Single-Sitting Microscopic Root Canal",
-        category: "Endodontics",
-        img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
-        desc: "High-magnification rotary canal instrumentation relieving acute dental pulp infections painlessly."
+        title: "Precision Endodontic Canal Therapy",
+        img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80"
       },
       {
         id: 3,
-        title: "Invisible Orthodontic Clear Aligners",
-        category: "Orthodontics",
-        img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80",
-        desc: "Custom thermoformed transparent aligners gently correcting crowded teeth and gaps without metal brackets."
+        title: "Aesthetic Porcelain Restorations",
+        img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
       },
       {
         id: 4,
-        title: "Laser Teeth Whitening Shade Lift",
-        category: "Cosmetics",
-        img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
-        desc: "Cold-light photo-activation gel lifting up to 8 shades of coffee, tea, and age discoloration safely in 40 minutes."
+        title: "Cold-Light Enamel Whitening",
+        img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80"
       },
       {
         id: 5,
-        title: "3D Computer-Guided Dental Implants",
-        category: "Implantology",
-        img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80",
-        desc: "Permanent titanium fixture osseointegration providing lifelike chewing stability and natural jaw aesthetics."
+        title: "Ergonomic Treatment Operatory",
+        img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
       },
       {
         id: 6,
-        title: "Porcelain Ceramic Veneers & Smile Makeover",
-        category: "Aesthetics",
-        img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80",
-        desc: "Ultra-thin custom porcelain laminate veneers correcting chipped surfaces, enamel wear, and shape irregularities."
+        title: "Class-B Autoclave Sterilization Suite",
+        img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        id: 7,
+        title: "Digital Intraoral Diagnostic Imaging",
+        img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        id: 8,
+        title: "Guided Implant Fixture Placement",
+        img: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        id: 9,
+        title: "Orthodontic Aligners & Bite Modeling",
+        img: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=1000&q=80"
+      },
+      {
+        id: 10,
+        title: "Chairside Shade-Matching Studio",
+        img: "https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=1000&q=80"
       }
     ];
 
@@ -125,7 +133,6 @@
       const config = CLINIC_CONFIG;
       const [menuOpen, setMenuOpen] = useState(false);
       const [lightbox, setLightbox] = useState(null);
-      const [galleryFilter, setGalleryFilter] = useState("All");
 
       // Appointment form state
       const [appointmentForm, setAppointmentForm] = useState({
@@ -137,16 +144,6 @@
         notes: ""
       });
       const [bookedNotice, setBookedNotice] = useState(null);
-
-      const galleryCategories = useMemo(
-        () => ["All", ...Array.from(new Set(TREATMENT_GALLERY.map((g) => g.category)))],
-        []
-      );
-
-      const visibleGallery = useMemo(
-        () => galleryFilter === "All" ? TREATMENT_GALLERY : TREATMENT_GALLERY.filter((g) => g.category === galleryFilter),
-        [galleryFilter]
-      );
 
       const handleBookAppointment = (e) => {
         e.preventDefault();
@@ -161,7 +158,6 @@
           ...appointmentForm
         });
 
-        // Reset form
         setAppointmentForm({
           name: "",
           phone: "",
@@ -207,10 +203,10 @@
               <nav className="hidden items-center gap-7 lg:flex text-sm font-semibold text-slate-600">
                 <a href="#home" className="hover:text-teal-700 transition">Home</a>
                 <a href="#treatments" className="hover:text-teal-700 transition">Treatments</a>
-                <a href="#gallery" className="hover:text-teal-700 transition">Teeth Gallery</a>
-                <a href="#timing" className="hover:text-teal-700 transition">Clinic Timings</a>
+                <a href="#gallery" className="hover:text-teal-700 transition">Clinical Gallery</a>
+                <a href="#timing" className="hover:text-teal-700 transition">Timings</a>
                 <a href="#doctor" className="hover:text-teal-700 transition">Doctor Profile</a>
-                <a href="#appointment" className="hover:text-teal-700 transition">Book Appointment</a>
+                <a href="#appointment" className="hover:text-teal-700 transition">Book Visit</a>
               </nav>
 
               <div className="flex items-center gap-3">
@@ -234,10 +230,10 @@
               <div className="border-t border-teal-100 bg-white px-4 py-3 lg:hidden text-sm font-semibold text-slate-700 flex flex-col gap-2.5">
                 <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
                 <a href="#treatments" onClick={() => setMenuOpen(false)}>Treatments</a>
-                <a href="#gallery" onClick={() => setMenuOpen(false)}>Teeth Gallery</a>
-                <a href="#timing" onClick={() => setMenuOpen(false)}>Clinic Timings</a>
+                <a href="#gallery" onClick={() => setMenuOpen(false)}>Clinical Gallery</a>
+                <a href="#timing" onClick={() => setMenuOpen(false)}>Timings</a>
                 <a href="#doctor" onClick={() => setMenuOpen(false)}>Doctor Profile</a>
-                <a href="#appointment" onClick={() => setMenuOpen(false)}>Book Appointment</a>
+                <a href="#appointment" onClick={() => setMenuOpen(false)}>Book Visit</a>
               </div>
             )}
           </header>
@@ -261,7 +257,7 @@
                       📅 Book Your Appointment
                     </a>
                     <a href="#gallery" className="rounded-full border border-teal-600 px-7 py-3.5 font-bold text-teal-700 transition hover:bg-teal-50">
-                      View Treatment Gallery
+                      View Clinical Gallery
                     </a>
                   </div>
 
@@ -282,11 +278,13 @@
                 </div>
 
                 <div className="relative">
-                  <img
-                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
-                    alt="Dental operatory chair"
-                    className="h-full max-h-[500px] w-full rounded-[2rem] object-cover shadow-2xl border-4 border-white"
-                  />
+                  <div className="overflow-hidden rounded-[2rem] shadow-2xl border-4 border-white bg-slate-100">
+                    <img
+                      src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+                      alt="Dental treatment bay"
+                      className="h-full max-h-[500px] w-full object-cover transition duration-500 hover:scale-105"
+                    />
+                  </div>
                   <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 backdrop-blur-sm p-4 shadow-xl border border-stone-100">
                     <p className="font-bold text-teal-900 font-serif text-lg">{config.doctorName}</p>
                     <p className="text-xs text-slate-600">{config.doctorDesignation}</p>
@@ -330,67 +328,55 @@
               </div>
             </section>
 
-            {/* Teeth & Treatment Gallery Section (6 High-Quality Photos) */}
-            <section id="gallery" className="bg-teal-900 py-16 text-white lg:py-24">
+            {/* 10 Pictures Section (Clean, Professional Effects, No Text Overlaid on Images) */}
+            <section id="gallery" className="py-20 bg-stone-50 border-t border-stone-200">
               <div className="mx-auto max-w-7xl px-4 sm:px-6">
-                <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-teal-300 bg-white/10 px-3 py-1 rounded-full border border-white/20">
-                      Visual Clinical Showcase
-                    </span>
-                    <h2 className="mt-2 font-serif text-3xl font-bold sm:text-4xl">Teeth & Treatment Gallery</h2>
-                    <p className="mt-2 max-w-2xl text-teal-100 text-sm">
-                      Inspect our clinical treatments, from precision single-visit root canals and ultrasonic stain removal to aesthetic porcelain veneers and guided implants.
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {galleryCategories.map((category) => (
-                      <button
-                        key={category}
-                        onClick={() => setGalleryFilter(category)}
-                        className={"rounded-full px-4 py-2 text-xs font-semibold transition " + (galleryFilter === category ? "bg-white text-teal-900" : "bg-white/10 text-white hover:bg-white/20")}
-                      >
-                        {category}
-                      </button>
-                    ))}
-                  </div>
+                <div className="text-center max-w-2xl mx-auto mb-14">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-100 px-3 py-1 rounded-full border border-teal-200">
+                    Clinical Standards
+                  </span>
+                  <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-bold text-slate-900">
+                    Teeth & Procedural Infrastructure
+                  </h2>
+                  <p className="mt-3 text-sm text-slate-600">
+                    A visual walkthrough of our surgical operatories, diagnostic imaging, microscopic canal therapy, and smile restorations.
+                  </p>
                 </div>
 
-                <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {visibleGallery.map((item, index) => (
-                    <button
+                {/* 10-Picture Clean Professional Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+                  {GALLERY_IMAGES.map((item, index) => (
+                    <div
                       key={item.id}
                       onClick={() => setLightbox(index)}
-                      className="group overflow-hidden rounded-3xl bg-white/5 text-left border border-white/10 shadow-lg"
+                      className="group cursor-pointer rounded-2xl overflow-hidden bg-white border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                     >
-                      <div className="relative h-60 w-full overflow-hidden">
+                      {/* Image container: No text overlays, smooth scale and brightness filter */}
+                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-900">
                         <img 
                           src={item.img} 
                           alt={item.title} 
-                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105" 
+                          className="h-full w-full object-cover transition-all duration-500 ease-out filter brightness-[0.98] contrast-[1.02] group-hover:scale-105 group-hover:brightness-100" 
                         />
-                        <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm text-[11px] font-bold text-teal-300 px-3 py-1 rounded-full">
-                          {item.category}
-                        </div>
                       </div>
-                      <div className="p-5">
-                        <h3 className="font-serif text-lg font-bold text-white">{item.title}</h3>
-                        <p className="mt-2 text-xs text-teal-100/80 leading-relaxed">{item.desc}</p>
-                        <span className="mt-3 inline-block text-[11px] font-semibold text-teal-300">
-                          Click to enlarge photo 🔍
-                        </span>
+
+                      {/* Clean caption card strictly below the picture */}
+                      <div className="p-3 text-center border-t border-stone-100">
+                        <p className="text-xs font-semibold text-slate-700 truncate group-hover:text-teal-700 transition">
+                          {item.title}
+                        </p>
                       </div>
-                    </button>
+                    </div>
                   ))}
                 </div>
               </div>
             </section>
 
             {/* Weekly Timings & Schedule Section */}
-            <section id="timing" className="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
+            <section id="timing" className="py-16 sm:py-20 bg-white border-t border-stone-200">
               <div className="max-w-5xl mx-auto px-4 sm:px-6">
                 <div className="text-center max-w-2xl mx-auto mb-12">
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-100 px-3 py-1 rounded-full border border-teal-200">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
                     Clinic Working Hours
                   </span>
                   <h2 className="mt-2 font-serif text-3xl font-bold text-teal-900">Weekly Open & Close Schedule</h2>
@@ -399,13 +385,13 @@
 
                 <div className="grid md:grid-cols-3 gap-6">
                   {WEEKLY_SCHEDULE.map((item, idx) => (
-                    <div key={idx} className="rounded-3xl border border-teal-100 bg-white p-6 shadow-sm hover:shadow-md transition">
+                    <div key={idx} className="rounded-3xl border border-teal-100 bg-stone-50/50 p-6 shadow-sm hover:shadow-md transition">
                       <div className="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">
                         <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Open
                       </div>
                       <h3 className="font-serif text-xl font-bold text-slate-900">{item.days}</h3>
                       <p className="mt-2 text-lg font-extrabold text-teal-700">{item.hours}</p>
-                      <p className="mt-3 text-xs text-slate-500 leading-relaxed pt-3 border-t border-stone-100">{item.status}</p>
+                      <p className="mt-3 text-xs text-slate-500 leading-relaxed pt-3 border-t border-stone-200">{item.status}</p>
                     </div>
                   ))}
                 </div>
@@ -417,13 +403,15 @@
             </section>
 
             {/* Doctor Profile */}
-            <section id="doctor" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+            <section id="doctor" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24 border-t border-stone-200">
               <div className="grid items-center gap-10 lg:grid-cols-2">
-                <img
-                  src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
-                  alt="Doctor consultation suite"
-                  className="h-96 w-full rounded-[2rem] object-cover shadow-xl border-4 border-white"
-                />
+                <div className="overflow-hidden rounded-[2rem] shadow-xl border-4 border-white bg-slate-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                    alt="Doctor consultation suite"
+                    className="h-96 w-full object-cover transition duration-500 hover:scale-105"
+                  />
+                </div>
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
                     Lead Clinical Specialist
@@ -446,7 +434,7 @@
               </div>
             </section>
 
-            {/* Direct Online Appointment Booking Engine (Replaces WhatsApp Link) */}
+            {/* Direct Online Appointment Booking Engine */}
             <section id="appointment" className="py-16 sm:py-24 bg-stone-50 border-t border-stone-200">
               <div className="max-w-3xl mx-auto px-4 sm:px-6">
                 <div className="rounded-3xl bg-white p-8 sm:p-12 shadow-xl border border-teal-100">
@@ -664,10 +652,10 @@
             <p className="mt-6 text-teal-400">© 2026 {config.clinicName}. All rights reserved.</p>
           </footer>
 
-          {/* Photo Gallery Lightbox Modal */}
-          {lightbox !== null && visibleGallery[lightbox] && (
+          {/* Clean Lightbox Modal (No text on photo, just clean close & view) */}
+          {lightbox !== null && GALLERY_IMAGES[lightbox] && (
             <div 
-              className="fixed inset-0 z-50 grid place-items-center bg-black/85 p-4 backdrop-blur-xs" 
+              className="fixed inset-0 z-50 grid place-items-center bg-black/90 p-4 backdrop-blur-sm" 
               onClick={() => setLightbox(null)}
             >
               <div 
@@ -675,33 +663,19 @@
                 onClick={(e) => e.stopPropagation()}
               >
                 <img 
-                  src={visibleGallery[lightbox].img} 
-                  alt={visibleGallery[lightbox].title} 
-                  className="max-h-[65vh] w-full object-cover" 
+                  src={GALLERY_IMAGES[lightbox].img} 
+                  alt={GALLERY_IMAGES[lightbox].title} 
+                  className="max-h-[75vh] w-full object-cover" 
                 />
-                <div className="p-6">
-                  <p className="text-xs font-bold uppercase tracking-wide text-teal-700">{visibleGallery[lightbox].category}</p>
-                  <h3 className="mt-1 font-serif text-2xl font-bold text-teal-900">{visibleGallery[lightbox].title}</h3>
-                  <p className="mt-2 text-xs sm:text-sm text-slate-600">{visibleGallery[lightbox].desc}</p>
+                <div className="p-4 bg-white flex justify-between items-center">
+                  <p className="font-serif text-lg font-bold text-teal-900">{GALLERY_IMAGES[lightbox].title}</p>
+                  <button 
+                    onClick={() => setLightbox(null)} 
+                    className="rounded-full bg-stone-100 hover:bg-stone-200 text-slate-700 w-8 h-8 flex items-center justify-center font-bold text-sm transition"
+                  >
+                    ✕
+                  </button>
                 </div>
-                <button
-                  onClick={() => setLightbox((lightbox - 1 + visibleGallery.length) % visibleGallery.length)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2.5 font-bold shadow hover:bg-white"
-                >
-                  ◀
-                </button>
-                <button
-                  onClick={() => setLightbox((lightbox + 1) % visibleGallery.length)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2.5 font-bold shadow hover:bg-white"
-                >
-                  ▶
-                </button>
-                <button 
-                  onClick={() => setLightbox(null)} 
-                  className="absolute right-4 top-4 rounded-full bg-white/90 w-8 h-8 flex items-center justify-center font-bold shadow hover:bg-white"
-                >
-                  ✕
-                </button>
               </div>
             </div>
           )}
