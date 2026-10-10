@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dentel clinic | Dr. krishna</title>
-  <meta name="description" content="Advanced dental care and smile aesthetics by Dr. krishna in Hegganahalli, Bengaluru." />
+  <title>Dentel clinic | Dr. krishna | Bengaluru</title>
+  <meta name="description" content="Dentel clinic led by Dr. krishna in Hegganahalli, Bengaluru. Advanced dental implants, painless root canals, and teeth whitening." />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,7 @@
     }
   </script>
 
-  <!-- React 18 & Babel in-browser runtime -->
+  <!-- React 18 & Babel in-browser engine -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -46,141 +46,152 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState, useEffect, useMemo } = React;
+    const { useState, useMemo } = React;
 
     const CLINIC_CONFIG = {
       clinicName: "Dentel clinic",
       tagline: "Advanced Dental Care & Precision Smile Aesthetics",
       phone: "7782962661",
-      whatsapp: "917782962661",
       address: "Siddeshwara Medicals, 73/1, KTG College Rd, Hegganahalli, Bengaluru, Karnataka 560091",
-      timing: "Mon - Sun: 9:00 AM - 10:00 PM",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=Siddeshwara+Medicals+73%2F1+KTG+College+Rd+Hegganahalli+Bengaluru+Karnataka+560091",
       doctorName: "Dr. krishna",
       doctorDesignation: "BDS, MDS - Advanced Prosthodontics & Oral Implantology",
       doctorExperience: "15+ Years Clinical Mastery",
-      doctorBio: "Committed to gentle, precision dental care with zero-fear protocols. Specialized in painless single-visit root canals, computer-guided implant restorations, and microscopic aesthetics."
+      doctorBio: "Dedicated to gentle, ethical, and precision dental healthcare. Specializing in single-sitting microscopic root canals, computer-guided implant restorations, painless ultrasonic scaling, and smile design."
     };
 
-    const CLINIC_GALLERY = [
-      { id: 1, title: "Ergonomic Operatory Suite", category: "Operatory", img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80", desc: "Computerized dental chair equipped with intraoral camera, ultrasonic scaler, and ambient lighting." },
-      { id: 2, title: "Diagnostic 3D CBCT Center", category: "3D Imaging", img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80", desc: "Ultra-low-radiation panoramic digital imaging enabling sub-millimeter diagnostic precision." },
-      { id: 3, title: "Class-B Autoclave Sterilization Bay", category: "Sterilization", img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80", desc: "Hospital-grade vacuum sterilization protocols with individually sealed single-use patient hygiene kits." },
-      { id: 4, title: "Aesthetic Treatment Lounge", category: "Lounge", img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80", desc: "Tranquil consultation rooms designed for relaxed case discussions and digital smile simulations." },
-      { id: 5, title: "Precision Micro-Surgical Dental Tools", category: "Instruments", img: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80", desc: "German engineered micro-endodontic rotary systems ensuring over 99% pain-free root canals." },
-      { id: 6, title: "Cosmetic Veneers & Smile Studio", category: "Aesthetics", img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80", desc: "Dedicated chairside shade-matching station for natural, glowing smile makeovers." }
+    const WEEKLY_SCHEDULE = [
+      { days: "Monday – Friday", hours: "9:00 AM – 10:00 PM", status: "Full Multi-Speciality Practice" },
+      { days: "Saturday", hours: "9:00 AM – 10:00 PM", status: "Full Working Hours & Surgeries" },
+      { days: "Sunday", hours: "9:00 AM – 9:00 PM", status: "Consultations & Urgent Dental Care" }
+    ];
+
+    // 6 Distinct Teeth & Dental Treatment Photos
+    const TREATMENT_GALLERY = [
+      {
+        id: 1,
+        title: "Ultrasonic Scaling & Deep Stain Removal",
+        category: "Cleaning & Hygiene",
+        img: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1000&q=80",
+        desc: "Gentle ultrasonic piezo scaling removing deep tartar and plaque while safeguarding natural tooth enamel."
+      },
+      {
+        id: 2,
+        title: "Single-Sitting Microscopic Root Canal",
+        category: "Endodontics",
+        img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1000&q=80",
+        desc: "High-magnification rotary canal instrumentation relieving acute dental pulp infections painlessly."
+      },
+      {
+        id: 3,
+        title: "Invisible Orthodontic Clear Aligners",
+        category: "Orthodontics",
+        img: "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80",
+        desc: "Custom thermoformed transparent aligners gently correcting crowded teeth and gaps without metal brackets."
+      },
+      {
+        id: 4,
+        title: "Laser Teeth Whitening Shade Lift",
+        category: "Cosmetics",
+        img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
+        desc: "Cold-light photo-activation gel lifting up to 8 shades of coffee, tea, and age discoloration safely in 40 minutes."
+      },
+      {
+        id: 5,
+        title: "3D Computer-Guided Dental Implants",
+        category: "Implantology",
+        img: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80",
+        desc: "Permanent titanium fixture osseointegration providing lifelike chewing stability and natural jaw aesthetics."
+      },
+      {
+        id: 6,
+        title: "Porcelain Ceramic Veneers & Smile Makeover",
+        category: "Aesthetics",
+        img: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1000&q=80",
+        desc: "Ultra-thin custom porcelain laminate veneers correcting chipped surfaces, enamel wear, and shape irregularities."
+      }
     ];
 
     const TREATMENTS = [
-      { id: "rct", title: "Single-Visit Painless Root Canal", category: "Endodontics", time: "45 Mins", desc: "Microscopic rotary canal cleaning and bioceramic hermetic sealing to preserve natural teeth with zero discomfort." },
-      { id: "implants", title: "Computer-Guided Dental Implants", category: "Implantology", time: "Single Sitting", desc: "Permanent titanium and zirconia roots anchored with 3D CBCT surgical guides for natural bite and lifelong stability." },
-      { id: "aligners", title: "Invisible Clear Aligners", category: "Orthodontics", time: "6-12 Months", desc: "Virtually invisible, custom thermoformed aligners that align your bite smoothly without metal brackets." },
-      { id: "whitening", title: "Laser Teeth Whitening", category: "Cosmetics", time: "40 Mins", desc: "Philips Zoom medical cold-light whitening lifting years of deep tea, coffee, and age stains safely." },
-      { id: "pediatric", title: "Pediatric Gentle Dental Care", category: "Children", time: "30 Mins", desc: "Child-friendly cavity protection, pit & fissure sealing, and gentle habit-breaking counseling for kids." },
-      { id: "emergency", title: "Emergency Toothache Relief", category: "Urgent Care", time: "Priority Immediate", desc: "Immediate relief for severe pulp inflammation, broken cusps, knocked-out teeth, or acute jaw swelling." }
+      { id: "rct", title: "Single-Visit Painless Root Canal", time: "45 Mins", desc: "Computerized canal mapping and bioceramic hermetic sealing to save natural teeth without discomfort." },
+      { id: "implants", title: "Computer-Guided Dental Implants", time: "Single Sitting", desc: "Permanent titanium roots placed using 3D surgical guides for lifetime strength and natural bite." },
+      { id: "aligners", title: "Invisible Clear Aligners", time: "6-12 Months", desc: "Discreet transparent trays gently aligning crooked or crowded teeth without uncomfortable metal wires." },
+      { id: "whitening", title: "Laser Teeth Whitening", time: "40 Mins", desc: "Professional cold-light whitening lifting deep stains and restoring natural, youthful brightness." },
+      { id: "scaling", title: "Ultrasonic Scaling & Polishing", time: "30 Mins", desc: "Painless ultrasonic plaque, calculus, and nicotine stain removal followed by fluoride polishing." },
+      { id: "emergency", title: "Emergency Dental Trauma Relief", time: "Immediate", desc: "Rapid treatment for acute toothache, broken cusps, abscess swelling, or dislodged restorations." }
     ];
-
-    const STORAGE_KEY = "dentel-clinic-appointments";
 
     function App() {
       const config = CLINIC_CONFIG;
       const [menuOpen, setMenuOpen] = useState(false);
-      const [drawerOpen, setDrawerOpen] = useState(false);
       const [lightbox, setLightbox] = useState(null);
       const [galleryFilter, setGalleryFilter] = useState("All");
-      const [sliderPos, setSliderPos] = useState(50);
 
-      const [appointments, setAppointments] = useState(() => {
-        try {
-          const saved = localStorage.getItem(STORAGE_KEY);
-          return saved ? JSON.parse(saved) : [{
-            id: "APT-892104",
-            title: "Single-Visit Painless Root Canal",
-            category: "Endodontics",
-            time: "11:00 AM",
-            bookedAt: new Date().toISOString()
-          }];
-        } catch {
-          return [];
-        }
+      // Appointment form state
+      const [appointmentForm, setAppointmentForm] = useState({
+        name: "",
+        phone: "",
+        service: "Single-Visit Painless Root Canal",
+        date: "",
+        time: "10:00 AM",
+        notes: ""
       });
-
-      useEffect(() => {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(appointments));
-        } catch (e) {
-          console.error(e);
-        }
-      }, [appointments]);
-
-      const downloadSelf = () => {
-        const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
-        const blob = new Blob([htmlContent], { type: "text/html;charset=utf-8" });
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "index.html";
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      };
+      const [bookedNotice, setBookedNotice] = useState(null);
 
       const galleryCategories = useMemo(
-        () => ["All", ...Array.from(new Set(CLINIC_GALLERY.map((g) => g.category)))],
+        () => ["All", ...Array.from(new Set(TREATMENT_GALLERY.map((g) => g.category)))],
         []
       );
 
       const visibleGallery = useMemo(
-        () => galleryFilter === "All" ? CLINIC_GALLERY : CLINIC_GALLERY.filter((g) => g.category === galleryFilter),
+        () => galleryFilter === "All" ? TREATMENT_GALLERY : TREATMENT_GALLERY.filter((g) => g.category === galleryFilter),
         [galleryFilter]
       );
 
-      const whatsappLink = (msg) =>
-        "https://wa.me/" + config.whatsapp + "?text=" + encodeURIComponent(msg);
+      const handleBookAppointment = (e) => {
+        e.preventDefault();
+        if (!appointmentForm.name || !appointmentForm.phone || !appointmentForm.date) {
+          alert("Please fill in patient name, phone number, and preferred appointment date.");
+          return;
+        }
 
-      const addAppointment = (treatment) => {
-        setAppointments((prev) => [
-          ...prev,
-          {
-            id: treatment.id + "-" + Date.now(),
-            treatmentId: treatment.id,
-            title: treatment.title,
-            category: treatment.category,
-            time: treatment.time,
-            bookedAt: new Date().toISOString()
-          }
-        ]);
-        setDrawerOpen(true);
-      };
+        const token = "DENT-" + Math.floor(100000 + Math.random() * 900000);
+        setBookedNotice({
+          token,
+          ...appointmentForm
+        });
 
-      const cancelAppointment = (appointment) => {
-        const message = "Hello " + config.clinicName + ", I would like to cancel my appointment for \"" + appointment.title + "\". Booked on " + new Date(appointment.bookedAt).toLocaleString() + ".";
-        window.open(whatsappLink(message), "_blank");
-        setAppointments((prev) => prev.filter((item) => item.id !== appointment.id));
+        // Reset form
+        setAppointmentForm({
+          name: "",
+          phone: "",
+          service: "Single-Visit Painless Root Canal",
+          date: "",
+          time: "10:00 AM",
+          notes: ""
+        });
       };
 
       return (
         <div className="min-h-screen bg-[#FDFCFB] text-slate-800">
           
-          {/* Top Quick Info Bar with Direct Download Option */}
+          {/* Top Clinical Announcement Bar */}
           <aside className="bg-slate-900 text-slate-300 text-xs py-2.5 px-4 flex justify-between items-center flex-wrap gap-2">
             <div className="flex gap-4 items-center">
-              <span className="text-emerald-400 font-semibold">● Open Daily: {config.timing}</span>
+              <span className="text-emerald-400 font-semibold flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Open Mon–Sat: 9 AM–10 PM | Sun: 9 AM–9 PM
+              </span>
               <span className="hidden md:inline">📍 {config.address}</span>
             </div>
-            <div className="flex gap-3 items-center">
-              <a href={"tel:" + config.phone} className="hover:text-white font-semibold">
-                📞 {config.phone}
+            <div>
+              <a href={"tel:" + config.phone} className="text-teal-300 font-bold hover:text-white flex items-center gap-1.5">
+                📞 Helpline: {config.phone}
               </a>
-              <button 
-                onClick={downloadSelf}
-                className="bg-teal-700 hover:bg-teal-600 text-white font-bold px-3 py-1 rounded-lg text-[11px] transition shadow-xs flex items-center gap-1"
-                title="Download this single index.html file to your computer"
-              >
-                💾 Download index.html
-              </button>
             </div>
           </aside>
 
-          {/* Sticky Header */}
+          {/* Sticky Navigation */}
           <header className="sticky top-0 z-40 border-b border-teal-100 bg-white/95 backdrop-blur-md">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
               <a href="#home" className="flex items-center gap-3">
@@ -194,40 +205,39 @@
               </a>
 
               <nav className="hidden items-center gap-7 lg:flex text-sm font-semibold text-slate-600">
-                <a href="#home" className="hover:text-teal-700">Home</a>
-                <a href="#treatments" className="hover:text-teal-700">Treatments</a>
-                <a href="#gallery" className="hover:text-teal-700">Facilities</a>
-                <a href="#transformation" className="hover:text-teal-700">Results</a>
-                <a href="#doctor" className="hover:text-teal-700">Doctor</a>
-                <a href="#contact" className="hover:text-teal-700">Contact</a>
+                <a href="#home" className="hover:text-teal-700 transition">Home</a>
+                <a href="#treatments" className="hover:text-teal-700 transition">Treatments</a>
+                <a href="#gallery" className="hover:text-teal-700 transition">Teeth Gallery</a>
+                <a href="#timing" className="hover:text-teal-700 transition">Clinic Timings</a>
+                <a href="#doctor" className="hover:text-teal-700 transition">Doctor Profile</a>
+                <a href="#appointment" className="hover:text-teal-700 transition">Book Appointment</a>
               </nav>
 
               <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setDrawerOpen(true)}
-                  className="relative rounded-full bg-teal-600 px-4 py-2 text-sm font-bold text-white transition hover:bg-teal-700 flex items-center gap-2"
+                <a
+                  href="#appointment"
+                  className="rounded-full bg-teal-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white transition hover:bg-teal-700 shadow-md flex items-center gap-1.5"
                 >
-                  <span>📅 Appointments</span>
-                  {appointments.length > 0 && (
-                    <span className="grid h-5 w-5 place-items-center rounded-full bg-rose-500 text-[11px] font-bold text-white">
-                      {appointments.length}
-                    </span>
-                  )}
-                </button>
-                <button className="rounded-full p-2 lg:hidden text-slate-700" onClick={() => setMenuOpen(!menuOpen)}>
+                  📅 Book Appointment
+                </a>
+                <button 
+                  className="rounded-full p-2 lg:hidden text-slate-700" 
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  aria-label="Toggle Navigation"
+                >
                   {menuOpen ? "✕" : "☰"}
                 </button>
               </div>
             </div>
 
             {menuOpen && (
-              <div className="border-t border-teal-100 bg-white px-4 py-3 lg:hidden text-sm font-semibold text-slate-700 flex flex-col gap-2">
+              <div className="border-t border-teal-100 bg-white px-4 py-3 lg:hidden text-sm font-semibold text-slate-700 flex flex-col gap-2.5">
                 <a href="#home" onClick={() => setMenuOpen(false)}>Home</a>
                 <a href="#treatments" onClick={() => setMenuOpen(false)}>Treatments</a>
-                <a href="#gallery" onClick={() => setMenuOpen(false)}>Facilities</a>
-                <a href="#transformation" onClick={() => setMenuOpen(false)}>Results</a>
-                <a href="#doctor" onClick={() => setMenuOpen(false)}>Doctor</a>
-                <a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
+                <a href="#gallery" onClick={() => setMenuOpen(false)}>Teeth Gallery</a>
+                <a href="#timing" onClick={() => setMenuOpen(false)}>Clinic Timings</a>
+                <a href="#doctor" onClick={() => setMenuOpen(false)}>Doctor Profile</a>
+                <a href="#appointment" onClick={() => setMenuOpen(false)}>Book Appointment</a>
               </div>
             )}
           </header>
@@ -241,95 +251,97 @@
                     🛡️ {config.doctorExperience}
                   </span>
                   <h1 className="mt-6 font-serif text-4xl font-extrabold leading-tight text-teal-900 sm:text-5xl lg:text-6xl">
-                    Advanced dental care with a gentle, precision-first approach
+                    Gentle, precision dental care you can smile about.
                   </h1>
                   <p className="mt-5 max-w-xl text-base sm:text-lg text-slate-600 leading-relaxed">
-                    Painless single-visit root canals, computer-guided implants, clear aligners, and cosmetic smile transformations in Hegganahalli, Bengaluru.
+                    Welcome to {config.clinicName}. Experience computer-guided dental implants, painless single-sitting root canals, ultrasonic teeth cleaning, and custom smile design in Hegganahalli, Bengaluru.
                   </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <a href="#treatments" className="rounded-full bg-teal-600 px-6 py-3 font-bold text-white transition hover:bg-teal-700 shadow-md">
-                      Explore Treatments
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <a href="#appointment" className="rounded-full bg-teal-600 px-7 py-3.5 font-bold text-white transition hover:bg-teal-700 shadow-lg">
+                      📅 Book Your Appointment
                     </a>
-                    <a
-                      href={whatsappLink("Hello " + config.clinicName + ", I would like to book a dental consultation.")}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-teal-600 px-6 py-3 font-bold text-teal-700 transition hover:bg-teal-50"
-                    >
-                      💬 WhatsApp Booking
+                    <a href="#gallery" className="rounded-full border border-teal-600 px-7 py-3.5 font-bold text-teal-700 transition hover:bg-teal-50">
+                      View Treatment Gallery
                     </a>
                   </div>
-                  <div className="mt-10 grid gap-4 grid-cols-3">
-                    <div className="rounded-2xl border border-teal-100 bg-white p-3 sm:p-4 text-center">
+
+                  <div className="mt-10 grid gap-4 grid-cols-3 max-w-lg">
+                    <div className="rounded-2xl border border-teal-100 bg-white p-4 text-center shadow-xs">
                       <p className="text-xl font-bold text-teal-900 font-serif">4.9 ★</p>
                       <p className="text-xs text-slate-500 font-semibold mt-0.5">Patient Rating</p>
                     </div>
-                    <div className="rounded-2xl border border-teal-100 bg-white p-3 sm:p-4 text-center">
+                    <div className="rounded-2xl border border-teal-100 bg-white p-4 text-center shadow-xs">
                       <p className="text-xl font-bold text-teal-900 font-serif">100%</p>
                       <p className="text-xs text-slate-500 font-semibold mt-0.5">Sterilization</p>
                     </div>
-                    <div className="rounded-2xl border border-teal-100 bg-white p-3 sm:p-4 text-center">
-                      <p className="text-xl font-bold text-teal-900 font-serif">3D</p>
-                      <p className="text-xs text-slate-500 font-semibold mt-0.5">Smile Design</p>
+                    <div className="rounded-2xl border border-teal-100 bg-white p-4 text-center shadow-xs">
+                      <p className="text-xl font-bold text-teal-900 font-serif">Zero</p>
+                      <p className="text-xs text-slate-500 font-semibold mt-0.5">Fear Protocol</p>
                     </div>
                   </div>
                 </div>
 
                 <div className="relative">
                   <img
-                    src={CLINIC_GALLERY[0].img}
-                    alt="Modern dental operatory"
+                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1000&q=80"
+                    alt="Dental operatory chair"
                     className="h-full max-h-[500px] w-full rounded-[2rem] object-cover shadow-2xl border-4 border-white"
                   />
-                  <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 backdrop-blur-sm p-4 shadow-xl">
-                    <p className="font-bold text-teal-900 font-serif">{config.doctorName}</p>
+                  <div className="absolute bottom-5 left-5 right-5 rounded-2xl bg-white/95 backdrop-blur-sm p-4 shadow-xl border border-stone-100">
+                    <p className="font-bold text-teal-900 font-serif text-lg">{config.doctorName}</p>
                     <p className="text-xs text-slate-600">{config.doctorDesignation}</p>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* Treatments Section */}
-            <section id="treatments" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+            {/* Core Treatments Section */}
+            <section id="treatments" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-20 border-t border-stone-200">
               <div className="mx-auto max-w-2xl text-center">
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-                  Comprehensive Services
+                  Comprehensive Oral Health
                 </span>
                 <h2 className="mt-2 font-serif text-3xl font-bold text-teal-900 sm:text-4xl">Specialised Dental Treatments</h2>
-                <p className="mt-3 text-slate-600 text-sm">Choose a treatment to add it to your appointment bag. Our team confirms your preferred slot directly.</p>
+                <p className="mt-3 text-slate-600 text-sm">Every procedure is conducted with micro-instruments, gentle anesthesia, and strict autoclave sterilization.</p>
               </div>
 
               <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {TREATMENTS.map((treatment) => (
-                  <article key={treatment.id} className="flex flex-col justify-between rounded-3xl border border-teal-100 bg-white p-6 shadow-xs hover:shadow-xl transition">
+                {TREATMENTS.map((t) => (
+                  <article key={t.id} className="flex flex-col justify-between rounded-3xl border border-teal-100 bg-white p-6 shadow-xs hover:shadow-xl transition">
                     <div>
                       <div className="flex items-center justify-between">
                         <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold uppercase tracking-wide text-teal-700">
-                          {treatment.category}
+                          {t.time}
                         </span>
-                        <span className="text-xs font-semibold text-slate-500">⏱ {treatment.time}</span>
+                        <span className="text-xs font-semibold text-slate-400">Sterile Suite</span>
                       </div>
-                      <h3 className="mt-4 font-serif text-xl font-bold text-teal-900">{treatment.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-slate-600">{treatment.desc}</p>
+                      <h3 className="mt-4 font-serif text-xl font-bold text-teal-900">{t.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600">{t.desc}</p>
                     </div>
-                    <button
-                      onClick={() => addAppointment(treatment)}
-                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-teal-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-teal-700"
+                    <a
+                      href="#appointment"
+                      onClick={() => setAppointmentForm({ ...appointmentForm, service: t.title })}
+                      className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-teal-50 border border-teal-200 px-5 py-2.5 text-xs font-bold text-teal-800 transition hover:bg-teal-600 hover:text-white"
                     >
-                      + Add to Appointment Bag
-                    </button>
+                      Book This Procedure →
+                    </a>
                   </article>
                 ))}
               </div>
             </section>
 
-            {/* Facilities Gallery */}
+            {/* Teeth & Treatment Gallery Section (6 High-Quality Photos) */}
             <section id="gallery" className="bg-teal-900 py-16 text-white lg:py-24">
               <div className="mx-auto max-w-7xl px-4 sm:px-6">
                 <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
                   <div>
-                    <h2 className="font-serif text-3xl font-bold sm:text-4xl">Clinic Facilities</h2>
-                    <p className="mt-2 max-w-2xl text-teal-100 text-sm">Advanced diagnostic, sterilization, and comfort infrastructure designed for safe and relaxed dental care.</p>
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-300 bg-white/10 px-3 py-1 rounded-full border border-white/20">
+                      Visual Clinical Showcase
+                    </span>
+                    <h2 className="mt-2 font-serif text-3xl font-bold sm:text-4xl">Teeth & Treatment Gallery</h2>
+                    <p className="mt-2 max-w-2xl text-teal-100 text-sm">
+                      Inspect our clinical treatments, from precision single-visit root canals and ultrasonic stain removal to aesthetic porcelain veneers and guided implants.
+                    </p>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {galleryCategories.map((category) => (
@@ -349,13 +361,24 @@
                     <button
                       key={item.id}
                       onClick={() => setLightbox(index)}
-                      className="group overflow-hidden rounded-3xl bg-white/5 text-left border border-white/10"
+                      className="group overflow-hidden rounded-3xl bg-white/5 text-left border border-white/10 shadow-lg"
                     >
-                      <img src={item.img} alt={item.title} className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
+                      <div className="relative h-60 w-full overflow-hidden">
+                        <img 
+                          src={item.img} 
+                          alt={item.title} 
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105" 
+                        />
+                        <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-sm text-[11px] font-bold text-teal-300 px-3 py-1 rounded-full">
+                          {item.category}
+                        </div>
+                      </div>
                       <div className="p-5">
-                        <p className="text-xs font-bold uppercase tracking-wide text-teal-200">{item.category}</p>
-                        <h3 className="mt-1 font-serif text-lg font-bold">{item.title}</h3>
+                        <h3 className="font-serif text-lg font-bold text-white">{item.title}</h3>
                         <p className="mt-2 text-xs text-teal-100/80 leading-relaxed">{item.desc}</p>
+                        <span className="mt-3 inline-block text-[11px] font-semibold text-teal-300">
+                          Click to enlarge photo 🔍
+                        </span>
                       </div>
                     </button>
                   ))}
@@ -363,35 +386,32 @@
               </div>
             </section>
 
-            {/* Before & After Comparison Slider */}
-            <section id="transformation" className="py-16 sm:py-24 bg-stone-50 border-b border-stone-200">
-              <div className="max-w-4xl mx-auto px-4 text-center">
-                <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-100 px-3 py-1 rounded-full border border-teal-200">
-                  Clinical Results
-                </span>
-                <h2 className="mt-2 font-serif text-3xl sm:text-4xl font-bold text-teal-900">Before & After Smile Transformation</h2>
-                <p className="mt-2 text-slate-600 text-sm mb-8">Drag the interactive slider horizontally to inspect teeth restoration and whitening outcomes.</p>
-                
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[16/9] select-none">
-                  <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1200&q=80" alt="After treatment" className="absolute inset-0 w-full h-full object-cover" />
-                  <div className="absolute top-4 right-4 bg-teal-800 text-white text-xs font-bold px-3 py-1 rounded-full shadow">AFTER</div>
-                  
-                  <div className="absolute inset-0 overflow-hidden" style={{ width: sliderPos + "%" }}>
-                    <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1200&q=80" alt="Before treatment" className="absolute inset-0 w-full h-full object-cover max-w-none" style={{ width: "100%", height: "100%" }} />
-                    <div className="absolute top-4 left-4 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-full shadow">BEFORE</div>
-                  </div>
+            {/* Weekly Timings & Schedule Section */}
+            <section id="timing" className="py-16 sm:py-20 bg-stone-50 border-b border-stone-200">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6">
+                <div className="text-center max-w-2xl mx-auto mb-12">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-100 px-3 py-1 rounded-full border border-teal-200">
+                    Clinic Working Hours
+                  </span>
+                  <h2 className="mt-2 font-serif text-3xl font-bold text-teal-900">Weekly Open & Close Schedule</h2>
+                  <p className="mt-2 text-sm text-slate-600">Open 7 days a week for scheduled consultations, post-op reviews, and immediate toothache relief.</p>
+                </div>
 
-                  <div className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize" style={{ left: sliderPos + "%" }}>
-                    <div className="absolute top-1/2 -left-4 -translate-y-1/2 w-8 h-8 rounded-full bg-white text-teal-800 shadow-md flex items-center justify-center text-xs font-bold border border-teal-600">⇄</div>
-                  </div>
-                  <input 
-                    type="range" 
-                    min="0" 
-                    max="100" 
-                    value={sliderPos} 
-                    onChange={(e) => setSliderPos(Number(e.target.value))} 
-                    className="absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-20" 
-                  />
+                <div className="grid md:grid-cols-3 gap-6">
+                  {WEEKLY_SCHEDULE.map((item, idx) => (
+                    <div key={idx} className="rounded-3xl border border-teal-100 bg-white p-6 shadow-sm hover:shadow-md transition">
+                      <div className="inline-flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-3">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Open
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-slate-900">{item.days}</h3>
+                      <p className="mt-2 text-lg font-extrabold text-teal-700">{item.hours}</p>
+                      <p className="mt-3 text-xs text-slate-500 leading-relaxed pt-3 border-t border-stone-100">{item.status}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 rounded-2xl bg-teal-50 border border-teal-200 p-4 text-center text-xs text-teal-900">
+                  ⚠️ <strong>Emergency Toothache or Fracture?</strong> Call <a href={"tel:" + config.phone} className="underline font-bold">{config.phone}</a> immediately for priority chair reservation.
                 </div>
               </div>
             </section>
@@ -400,48 +420,237 @@
             <section id="doctor" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
               <div className="grid items-center gap-10 lg:grid-cols-2">
                 <img
-                  src={CLINIC_GALLERY[3].img}
-                  alt="Doctor consultation lounge"
+                  src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=1000&q=80"
+                  alt="Doctor consultation suite"
                   className="h-96 w-full rounded-[2rem] object-cover shadow-xl border-4 border-white"
                 />
                 <div>
-                  <h2 className="font-serif text-3xl font-bold text-teal-900 sm:text-4xl">Meet {config.doctorName}</h2>
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+                    Lead Clinical Specialist
+                  </span>
+                  <h2 className="mt-2 font-serif text-3xl font-bold text-teal-900 sm:text-4xl">Meet {config.doctorName}</h2>
                   <p className="mt-2 font-semibold text-teal-700">{config.doctorDesignation}</p>
                   <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">{config.doctorBio}</p>
+                  
                   <div className="mt-8 grid gap-4 sm:grid-cols-2">
                     <div className="rounded-2xl border border-teal-100 bg-white p-5 shadow-xs">
                       <p className="font-bold text-teal-900">Zero-Fear Dentistry</p>
-                      <p className="mt-1 text-xs text-slate-600">Gentle anesthesia, clear explanations, and comfort-focused care.</p>
+                      <p className="mt-1 text-xs text-slate-600">Gentle anesthesia protocols, step-by-step guidance, and complete anxiety relief.</p>
                     </div>
                     <div className="rounded-2xl border border-teal-100 bg-white p-5 shadow-xs">
-                      <p className="font-bold text-teal-900">Precision Technology</p>
-                      <p className="mt-1 text-xs text-slate-600">Digital diagnostics and guided treatment planning.</p>
+                      <p className="font-bold text-teal-900">Computer-Guided Accuracy</p>
+                      <p className="mt-1 text-xs text-slate-600">Digital smile simulation, rotary apex locators, and precise tooth restorations.</p>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* Contact Details */}
+            {/* Direct Online Appointment Booking Engine (Replaces WhatsApp Link) */}
+            <section id="appointment" className="py-16 sm:py-24 bg-stone-50 border-t border-stone-200">
+              <div className="max-w-3xl mx-auto px-4 sm:px-6">
+                <div className="rounded-3xl bg-white p-8 sm:p-12 shadow-xl border border-teal-100">
+                  <div className="text-center max-w-xl mx-auto mb-8">
+                    <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+                      Online Reservation
+                    </span>
+                    <h2 className="mt-2 font-serif text-3xl font-bold text-teal-900">Book Your Dental Visit</h2>
+                    <p className="mt-2 text-xs sm:text-sm text-slate-500">
+                      Choose your preferred date, slot, and procedure. Our desk immediately locks your appointment with {config.doctorName}.
+                    </p>
+                  </div>
+
+                  {bookedNotice && (
+                    <div className="mb-8 rounded-2xl bg-emerald-50 border border-emerald-200 p-5 text-emerald-900">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-mono font-bold bg-emerald-200 text-emerald-900 px-2.5 py-0.5 rounded">
+                          Token: {bookedNotice.token}
+                        </span>
+                        <span className="text-xs font-bold text-emerald-700">✓ Booking Confirmed</span>
+                      </div>
+                      <p className="text-sm font-bold">Appointment scheduled for {bookedNotice.name}!</p>
+                      <p className="text-xs text-emerald-800 mt-1">
+                        Procedure: <strong>{bookedNotice.service}</strong> on <strong>{bookedNotice.date} at {bookedNotice.time}</strong>.
+                      </p>
+                      <p className="text-[11px] text-emerald-700 mt-2">
+                        A confirmation SMS has been logged for contact: {bookedNotice.phone}.
+                      </p>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleBookAppointment} className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-xs">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1 uppercase tracking-wide">
+                        Patient Full Name *
+                      </label>
+                      <input 
+                        type="text" 
+                        required 
+                        placeholder="e.g. Ramesh Kumar"
+                        value={appointmentForm.name}
+                        onChange={(e) => setAppointmentForm({ ...appointmentForm, name: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-stone-300 text-sm bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1 uppercase tracking-wide">
+                        Contact Phone Number *
+                      </label>
+                      <input 
+                        type="tel" 
+                        required 
+                        placeholder="e.g. 7782962661"
+                        value={appointmentForm.phone}
+                        onChange={(e) => setAppointmentForm({ ...appointmentForm, phone: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-stone-300 text-sm bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="block font-bold text-slate-700 mb-1 uppercase tracking-wide">
+                        Treatment / Concern
+                      </label>
+                      <select 
+                        value={appointmentForm.service}
+                        onChange={(e) => setAppointmentForm({ ...appointmentForm, service: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-stone-300 text-sm bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                      >
+                        {TREATMENTS.map((t) => (
+                          <option key={t.id} value={t.title}>{t.title}</option>
+                        ))}
+                        <option value="General Checkup & Teeth Examination">General Checkup & Teeth Examination</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1 uppercase tracking-wide">
+                        Preferred Date *
+                      </label>
+                      <input 
+                        type="date" 
+                        required 
+                        value={appointmentForm.date}
+                        onChange={(e) => setAppointmentForm({ ...appointmentForm, date: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-stone-300 text-sm bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1 uppercase tracking-wide">
+                        Preferred Time Slot
+                      </label>
+                      <select 
+                        value={appointmentForm.time}
+                        onChange={(e) => setAppointmentForm({ ...appointmentForm, time: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-stone-300 text-sm bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                      >
+                        <option>09:30 AM</option>
+                        <option>11:00 AM</option>
+                        <option>01:30 PM</option>
+                        <option>04:00 PM</option>
+                        <option>06:30 PM</option>
+                        <option>08:30 PM</option>
+                      </select>
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label className="block font-bold text-slate-700 mb-1 uppercase tracking-wide">
+                        Symptoms or Requests (Optional)
+                      </label>
+                      <textarea 
+                        rows={2}
+                        placeholder="e.g. Sensitivity to cold water on upper right molar."
+                        value={appointmentForm.notes}
+                        onChange={(e) => setAppointmentForm({ ...appointmentForm, notes: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-stone-300 text-sm bg-stone-50/50 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2 pt-2">
+                      <button 
+                        type="submit" 
+                        className="w-full py-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm shadow-md transition hover:shadow-lg"
+                      >
+                        Confirm Dental Appointment
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </section>
+
+            {/* Contact & Direct Google Maps Link Section */}
             <section id="contact" className="border-t border-teal-100 bg-white py-16 lg:py-24">
-              <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-3">
-                <div className="rounded-3xl border border-teal-100 bg-teal-50/40 p-6">
-                  <span className="text-2xl">📞</span>
-                  <h3 className="mt-3 font-serif text-xl font-bold text-teal-900">Call Us</h3>
-                  <p className="mt-2 text-slate-600 text-sm">{config.phone}</p>
-                  <a href={"tel:" + config.phone} className="mt-3 inline-block text-xs font-bold text-teal-700 hover:underline">Place a Call →</a>
+              <div className="mx-auto max-w-7xl px-4 sm:px-6">
+                <div className="text-center max-w-2xl mx-auto mb-12">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+                    Location & Directions
+                  </span>
+                  <h2 className="mt-2 font-serif text-3xl font-bold text-teal-900 sm:text-4xl">Visit Dentel clinic</h2>
+                  <p className="mt-2 text-slate-600 text-sm">Located on KTG College Road, Hegganahalli, Bengaluru.</p>
                 </div>
-                <div className="rounded-3xl border border-teal-100 bg-teal-50/40 p-6">
-                  <span className="text-2xl">📍</span>
-                  <h3 className="mt-3 font-serif text-xl font-bold text-teal-900">Visit Us</h3>
-                  <p className="mt-2 text-slate-600 text-sm leading-relaxed">{config.address}</p>
-                  <a href="https://maps.google.com/?q=Hegganahalli+Bengaluru" target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs font-bold text-teal-700 hover:underline">Get Directions →</a>
+
+                <div className="grid gap-8 lg:grid-cols-3">
+                  <div className="rounded-3xl border border-teal-100 bg-teal-50/40 p-6 flex flex-col justify-between">
+                    <div>
+                      <span className="text-3xl">📞</span>
+                      <h3 className="mt-3 font-serif text-xl font-bold text-teal-900">Direct Helpline</h3>
+                      <p className="mt-2 text-slate-600 text-sm">Call for appointment confirmations and emergencies:</p>
+                      <p className="mt-2 text-lg font-bold text-teal-800">{config.phone}</p>
+                    </div>
+                    <a href={"tel:" + config.phone} className="mt-5 inline-block text-xs font-bold text-teal-700 hover:underline">
+                      Call Desk Now →
+                    </a>
+                  </div>
+
+                  <div className="rounded-3xl border border-teal-100 bg-teal-50/40 p-6 flex flex-col justify-between">
+                    <div>
+                      <span className="text-3xl">📍</span>
+                      <h3 className="mt-3 font-serif text-xl font-bold text-teal-900">Physical Address</h3>
+                      <p className="mt-2 text-slate-600 text-sm leading-relaxed">{config.address}</p>
+                    </div>
+                    <a 
+                      href={config.mapUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="mt-5 inline-flex items-center gap-2 rounded-xl bg-teal-600 px-4 py-2.5 text-xs font-bold text-white hover:bg-teal-700 transition shadow-sm w-fit"
+                    >
+                      🗺️ Open in Google Maps
+                    </a>
+                  </div>
+
+                  <div className="rounded-3xl border border-teal-100 bg-teal-50/40 p-6 flex flex-col justify-between">
+                    <div>
+                      <span className="text-3xl">🕒</span>
+                      <h3 className="mt-3 font-serif text-xl font-bold text-teal-900">Weekly Timings</h3>
+                      <div className="mt-2 space-y-1 text-xs text-slate-600">
+                        <p><strong>Mon – Sat:</strong> 9:00 AM – 10:00 PM</p>
+                        <p><strong>Sunday:</strong> 9:00 AM – 9:00 PM</p>
+                      </div>
+                    </div>
+                    <a href="#timing" className="mt-5 inline-block text-xs font-bold text-teal-700 hover:underline">
+                      View full schedule details →
+                    </a>
+                  </div>
                 </div>
-                <div className="rounded-3xl border border-teal-100 bg-teal-50/40 p-6">
-                  <span className="text-2xl">🕒</span>
-                  <h3 className="mt-3 font-serif text-xl font-bold text-teal-900">Clinic Hours</h3>
-                  <p className="mt-2 text-slate-600 text-sm">{config.timing}</p>
-                  <p className="mt-1 text-xs text-emerald-600 font-semibold">Walk-ins & Appointments Welcome</p>
+
+                {/* Direct Google Maps Action Card */}
+                <div className="mt-12 rounded-3xl bg-slate-900 text-white p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-white">Need Turn-by-Turn GPS Directions?</h3>
+                    <p className="mt-1 text-sm text-slate-300 max-w-xl">
+                      Click below to launch Google Maps directly for real-time traffic and routing to Siddeshwara Medicals, KTG College Rd, Hegganahalli.
+                    </p>
+                  </div>
+                  <a
+                    href={config.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 rounded-full bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold px-7 py-3.5 text-sm transition shadow-lg flex items-center gap-2"
+                  >
+                    <span>📍 Get Google Maps Route</span>
+                  </a>
                 </div>
               </div>
             </section>
@@ -451,77 +660,25 @@
           <footer className="bg-teal-900 py-10 text-center text-teal-100 text-xs border-t border-teal-800">
             <p className="font-bold text-base text-white font-serif">{config.clinicName}</p>
             <p className="mt-2 max-w-md mx-auto">{config.address}</p>
-            <p className="mt-2">{config.phone} • {config.timing}</p>
+            <p className="mt-2">Helpline: {config.phone} • Mon–Sat: 9 AM–10 PM | Sun: 9 AM–9 PM</p>
             <p className="mt-6 text-teal-400">© 2026 {config.clinicName}. All rights reserved.</p>
           </footer>
 
-          {/* Appointments Bag Drawer */}
-          {drawerOpen && (
-            <div className="fixed inset-0 z-50 flex justify-end bg-black/50 backdrop-blur-xs" onClick={() => setDrawerOpen(false)}>
-              <aside className="h-full w-full max-w-md overflow-y-auto bg-white p-6 shadow-2xl flex flex-col justify-between" onClick={(e) => e.stopPropagation()}>
-                <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-stone-100">
-                    <div>
-                      <h2 className="font-serif text-xl font-bold text-teal-900">Appointment Bag</h2>
-                      <p className="text-xs text-slate-500">Manage or cancel booked visits</p>
-                    </div>
-                    <button onClick={() => setDrawerOpen(false)} className="rounded-full p-2 text-slate-400 hover:bg-slate-100 font-bold">✕</button>
-                  </div>
-
-                  {appointments.length === 0 ? (
-                    <div className="mt-12 rounded-3xl border border-dashed border-teal-200 p-8 text-center">
-                      <p className="text-2xl">📅</p>
-                      <p className="mt-3 font-bold text-teal-900 text-sm">No appointments selected</p>
-                      <p className="mt-1 text-xs text-slate-500">Add a treatment from the treatments list to request a visit.</p>
-                    </div>
-                  ) : (
-                    <div className="mt-6 space-y-4">
-                      {appointments.map((appointment) => (
-                        <div key={appointment.id} className="rounded-2xl border border-teal-100 bg-stone-50 p-4">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="font-bold text-teal-900 text-sm">{appointment.title}</span>
-                            <span className="text-xs text-emerald-600 font-bold">● Active</span>
-                          </div>
-                          <p className="text-xs text-slate-500">{appointment.category} • {appointment.time}</p>
-                          <p className="mt-1 text-[11px] text-slate-400">Added: {new Date(appointment.bookedAt).toLocaleDateString()}</p>
-                          <button
-                            onClick={() => cancelAppointment(appointment)}
-                            className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-rose-50 px-3.5 py-1.5 text-xs font-bold text-rose-600 hover:bg-rose-100 transition"
-                          >
-                            🗑 Cancel & Notify WhatsApp
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="pt-6 border-t border-stone-100">
-                  <a
-                    href={whatsappLink(
-                      appointments.length
-                        ? "Hello " + config.clinicName + ", I would like to book these treatments: " + appointments.map((a) => a.title).join(", ") + "."
-                        : "Hello " + config.clinicName + ", I would like to book a dental consultation."
-                    )}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center justify-center gap-2 rounded-full bg-teal-600 px-6 py-3.5 font-bold text-white hover:bg-teal-700 shadow-md transition text-sm"
-                  >
-                    💬 Confirm via WhatsApp
-                  </a>
-                  <p className="text-center text-[11px] text-slate-400 mt-2">
-                    Canceling directly notifies {config.clinicName} via WhatsApp.
-                  </p>
-                </div>
-              </aside>
-            </div>
-          )}
-
-          {/* Gallery Lightbox */}
+          {/* Photo Gallery Lightbox Modal */}
           {lightbox !== null && visibleGallery[lightbox] && (
-            <div className="fixed inset-0 z-50 grid place-items-center bg-black/85 p-4 backdrop-blur-xs" onClick={() => setLightbox(null)}>
-              <div className="relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl" onClick={(e) => e.stopPropagation()}>
-                <img src={visibleGallery[lightbox].img} alt={visibleGallery[lightbox].title} className="max-h-[65vh] w-full object-cover" />
+            <div 
+              className="fixed inset-0 z-50 grid place-items-center bg-black/85 p-4 backdrop-blur-xs" 
+              onClick={() => setLightbox(null)}
+            >
+              <div 
+                className="relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl bg-white shadow-2xl" 
+                onClick={(e) => e.stopPropagation()}
+              >
+                <img 
+                  src={visibleGallery[lightbox].img} 
+                  alt={visibleGallery[lightbox].title} 
+                  className="max-h-[65vh] w-full object-cover" 
+                />
                 <div className="p-6">
                   <p className="text-xs font-bold uppercase tracking-wide text-teal-700">{visibleGallery[lightbox].category}</p>
                   <h3 className="mt-1 font-serif text-2xl font-bold text-teal-900">{visibleGallery[lightbox].title}</h3>
@@ -539,7 +696,12 @@
                 >
                   ▶
                 </button>
-                <button onClick={() => setLightbox(null)} className="absolute right-4 top-4 rounded-full bg-white/90 w-8 h-8 flex items-center justify-center font-bold shadow hover:bg-white">✕</button>
+                <button 
+                  onClick={() => setLightbox(null)} 
+                  className="absolute right-4 top-4 rounded-full bg-white/90 w-8 h-8 flex items-center justify-center font-bold shadow hover:bg-white"
+                >
+                  ✕
+                </button>
               </div>
             </div>
           )}
